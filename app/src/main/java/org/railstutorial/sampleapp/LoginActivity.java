@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,11 +67,15 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<Envelop<User>>() {
             @Override
             public void onResponse(Call<Envelop<User>> call, Response<Envelop<User>> response) {
-                Envelop<User> envelop = response.body();
+                if (response.isSuccessful()) {
+                    Envelop<User> envelop = response.body();
 
-                Intent intent = new Intent(LoginActivity.this, UserActivity.class);
-                intent.putExtra(User.class.getCanonicalName(), Parcels.wrap(envelop.data));
-                startActivity(intent);
+                    Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+                    intent.putExtra(User.class.getCanonicalName(), Parcels.wrap(envelop.data));
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, R.string.log_in_failed, Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override

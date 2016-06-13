@@ -15,3 +15,26 @@
 #-keepclassmembers class fqcn.of.javascript.interface.for.webview {
 #   public *;
 #}
+
+# Retrofit ProGuard configuration
+-dontwarn retrofit2.**
+-keep class retrofit2.** { *; }
+-keepattributes Signature
+-keepattributes Exceptions
+
+# stetho
+-keep class com.facebook.stetho.** { *; }
+
+# rhino (javascript)
+-dontwarn org.mozilla.javascript.**
+-dontwarn org.mozilla.classfile.**
+-keep class org.mozilla.javascript.** { *; }
+
+# Parcel library
+-keep class **$$Parcelable { *; }
+
+# Okio
+-dontwarn okio.**
+
+# OkHttp
+-dontwarn com.squareup.okhttp.**

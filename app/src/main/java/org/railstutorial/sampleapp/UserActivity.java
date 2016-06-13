@@ -5,8 +5,11 @@ import com.squareup.picasso.Picasso;
 import org.parceler.Parcels;
 import org.railstutorial.sampleapp.model.User;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -25,6 +28,8 @@ public class UserActivity extends AppCompatActivity {
     @BindView(R.id.email_text)
     TextView mEmailText;
 
+    private User mUser;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +38,32 @@ public class UserActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        User user = Parcels.unwrap(getIntent().getParcelableExtra(User.class.getCanonicalName()));
+        mUser = Parcels.unwrap(getIntent().getParcelableExtra(User.class.getCanonicalName()));
 
-        Picasso.with(this).load(user.gravatarUrl).into(mAvatarImage);
-        mNameText.setText(user.name);
-        mEmailText.setText(user.email);
+        Picasso.with(this).load(mUser.gravatarUrl).into(mAvatarImage);
+        mNameText.setText(mUser.name);
+        mEmailText.setText(mUser.email);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_user_edit, menu);
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
-            return true;
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+
+            case R.id.action_user_edit:
+                Intent intent = new Intent(UserActivity.this, UserEditActivity.class);
+                intent.putExtra(User.class.getCanonicalName(), Parcels.wrap(mUser));
+                startActivity(intent);
+                return true;
         }
 
         return super.onOptionsItemSelected(item);

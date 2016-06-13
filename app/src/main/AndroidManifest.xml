@@ -26,8 +26,13 @@
         </activity>
         <activity
             android:name=".LoginActivity"
-            android:label="@string/title_log_in"
-            >
+            android:label="@string/title_log_in">
+        </activity>
+        <activity
+            android:name=".UsersActivity"
+            android:label="@string/title_users">
+        </activity>
+        <activity android:name=".UserEditActivity">
         </activity>
     </application>
 

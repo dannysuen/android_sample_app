@@ -1,5 +1,11 @@
 package org.railstutorial.sampleapp;
 
+import org.parceler.Parcels;
+import org.railstutorial.sampleapp.api.UserApiService;
+import org.railstutorial.sampleapp.model.Envelop;
+import org.railstutorial.sampleapp.model.User;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
@@ -8,6 +14,9 @@ import android.widget.EditText;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import retrofit2.Retrofit;
 
 
@@ -55,24 +64,22 @@ public class SignupActivity extends AppCompatActivity {
         String password = mPasswordField.getText().toString();
         String confirmPassword = mConfirmPasswordField.getText().toString();
 
-//        RequestBody body = new FormBody.Builder()
-//                .add("user[name]", name)
-//                .add("user[email]", email)
-//                .add("user[password]", password)
-//                .add("user[confirm_password]", confirmPassword)
-//                .build();
-//        Request request = new Request.Builder().url(ROOT_API + "api/v1/users").post(body).build();
-
-//        mClient.newCall(request).enqueue(new Callback() {
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//                System.out.println("onFailure: " + e.getMessage());
-//            }
+        UserApiService service = mRetrofit.create(UserApiService.class);
+        Call<Envelop<User>> call = service.signup(name, email, password, confirmPassword);
+        call.enqueue(new Callback<Envelop<User>>() {
+            @Override
+            public void onResponse(Call<Envelop<User>> call, Response<Envelop<User>> response) {
+//                Envelop<User> envelop = response.body();
 //
-//            @Override
-//            public void onResponse(Call call, Response response) throws IOException {
-//                System.out.println(response.body().string());
-//            }
-//        });
+//                Intent intent = new Intent(LoginActivity.this, UserActivity.class);
+//                intent.putExtra(User.class.getCanonicalName(), Parcels.wrap(envelop.data));
+//                startActivity(intent);
+            }
+
+            @Override
+            public void onFailure(Call<Envelop<User>> call, Throwable t) {
+
+            }
+        });
     }
 }

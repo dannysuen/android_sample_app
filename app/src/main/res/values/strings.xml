@@ -4,5 +4,9 @@
 
     <string name="profile">Profile</string>
     <string name="title_log_in">Log in</string>
+    <string name="title_users">View Users</string>
+
+    <string name="log_in_failed">Login failed!</string>
+    <string name="fetch_users_failed">Fetch users failed!</string>
 
 </resources>
