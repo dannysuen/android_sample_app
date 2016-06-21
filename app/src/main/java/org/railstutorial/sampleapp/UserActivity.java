@@ -62,10 +62,24 @@ public class UserActivity extends AppCompatActivity {
             case R.id.action_user_edit:
                 Intent intent = new Intent(UserActivity.this, UserEditActivity.class);
                 intent.putExtra(User.class.getCanonicalName(), Parcels.wrap(mUser));
-                startActivity(intent);
+                startActivityForResult(intent, UserEditActivity.ACTIVITY_CODE_USER_EDIT);
                 return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == UserEditActivity.ACTIVITY_CODE_USER_EDIT) {
+                mUser = Parcels.unwrap(data.getParcelableExtra(User.class.getCanonicalName()));
+                mNameText.setText(mUser.name);
+                mEmailText.setText(mUser.email);
+                Picasso.with(this).load(mUser.gravatarUrl).into(mAvatarImage);
+            }
+        }
     }
 }

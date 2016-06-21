@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">SampleApp</string>
+    <string name="app_name">Microblogging</string>
     <string name="title_activity_user">UserActivity</string>
 
     <string name="profile">Profile</string>
@@ -8,5 +8,6 @@
 
     <string name="log_in_failed">Login failed!</string>
     <string name="fetch_users_failed">Fetch users failed!</string>
+    <!--<string name="update_user_failed">Update user failed!</string>-->
 
 </resources>

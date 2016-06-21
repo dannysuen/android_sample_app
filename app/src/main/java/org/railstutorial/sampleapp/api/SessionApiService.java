@@ -14,7 +14,7 @@ import retrofit2.http.POST;
 public interface SessionApiService {
 
     @FormUrlEncoded
-    @POST("api/v1/sessions")
+    @POST("sessions")
     Call<Envelop<User>> login(@Field("user[email]") String email,
                               @Field("user[password]") String password);
 
