@@ -47,6 +47,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.ViewHolder> 
         mUsers = users;
     }
 
+    public void addAll(List<User> users) {
+        int size = getItemCount();
+        mUsers.addAll(users);
+        notifyItemRangeInserted(size, getItemCount());
+    }
+
+    public void clear() {
+        mUsers.clear();
+        notifyDataSetChanged();
+    }
+
     public List<User> getUsers() {
         return mUsers;
     }

@@ -12,6 +12,7 @@ import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by danny on 16-6-8.
@@ -27,7 +28,7 @@ public interface UserApiService {
 
 
     @GET("users")
-    Call<Envelop<List<User>>> fetchUsers();
+    Call<Envelop<List<User>>> fetchUsers(@Query("page") int page);
 
     @FormUrlEncoded
     @PATCH("users/{id}")

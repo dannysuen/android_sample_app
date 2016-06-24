@@ -25,7 +25,8 @@ public class Envelop<Data> {
     }
 
     public static class Pagination {
-        String nextUrl;
+        @SerializedName("next_url")
+        public String nextUrl;
     }
 
 }
