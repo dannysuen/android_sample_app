@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.EditText;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,6 +36,7 @@ public class SignupActivity extends AppCompatActivity {
     @BindView(R.id.confirm_password_field)
     EditText mConfirmPasswordField;
 
+    @Inject
     Retrofit mRetrofit;
 
     @Override
@@ -44,7 +47,6 @@ public class SignupActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRetrofit = ((SampleAppApplication) getApplication()).getRetrofit();
     }
 
     @Override

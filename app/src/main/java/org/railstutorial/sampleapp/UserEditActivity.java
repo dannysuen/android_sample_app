@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -37,7 +39,8 @@ public class UserEditActivity extends AppCompatActivity {
     @BindView(R.id.password_confirmation_field)
     EditText mPasswordConfirmationField;
 
-    private Retrofit mRetrofit;
+    @Inject
+    Retrofit mRetrofit;
 
     private User mUser;
 
@@ -48,8 +51,6 @@ public class UserEditActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        mRetrofit = ((SampleAppApplication) getApplication()).getRetrofit();
 
         mUser = Parcels.unwrap(getIntent().getParcelableExtra(User.class.getCanonicalName()));
 

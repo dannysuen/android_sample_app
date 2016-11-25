@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import retrofit2.Call;
@@ -33,7 +35,10 @@ public class UsersActivity extends AppCompatActivity {
 
     @BindView(R.id.users_list)
     RecyclerView mUsersRecyclerView;
-    private Retrofit mRetrofit;
+
+    @Inject
+    Retrofit mRetrofit;
+
     private UserApiService mService;
     private int mNextPage = 1;
 
@@ -47,7 +52,8 @@ public class UsersActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRetrofit = ((SampleAppApplication) getApplication()).getRetrofit();
+        SampleAppApplication.NET_COMPONENT.inject(this);
+
         mService = mRetrofit.create(UserApiService.class);
 
         // Set layout manager to position the items

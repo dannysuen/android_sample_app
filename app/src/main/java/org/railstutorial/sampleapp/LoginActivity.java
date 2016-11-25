@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -34,7 +36,8 @@ public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.password_field)
     EditText mPasswordField;
 
-    private Retrofit mRetrofit;
+    @Inject
+    Retrofit mRetrofit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,9 +45,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        SampleAppApplication.NET_COMPONENT.inject(this);
 
-        mRetrofit = ((SampleAppApplication) getApplication()).getRetrofit();
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     @Override

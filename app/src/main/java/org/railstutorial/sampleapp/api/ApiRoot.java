@@ -5,6 +5,6 @@ package org.railstutorial.sampleapp.api;
  */
 public class ApiRoot {
 
-    public static final String BASE_URL = "https://aqueous-everglades-88567.herokuapp.com/api/v1/";
+    public static final String BASE_URL = "https://railstutorial-101.herokuapp.com/api/v1/";
 
 }
