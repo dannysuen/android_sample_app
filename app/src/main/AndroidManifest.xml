@@ -25,7 +25,7 @@
             android:label="@string/profile">
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".auth.LoginActivity"
             android:label="@string/title_log_in">
         </activity>
         <activity

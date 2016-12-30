@@ -52,7 +52,6 @@ public class UsersActivity extends AppCompatActivity {
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        SampleAppApplication.NET_COMPONENT.inject(this);
 
         mService = mRetrofit.create(UserApiService.class);
 

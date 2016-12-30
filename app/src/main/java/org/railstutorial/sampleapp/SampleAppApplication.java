@@ -6,6 +6,8 @@ import com.squareup.picasso.Picasso;
 
 import android.app.Application;
 
+import org.railstutorial.sampleapp.api.ApiComponent;
+
 import javax.inject.Inject;
 
 import okhttp3.OkHttpClient;
@@ -15,7 +17,11 @@ import okhttp3.OkHttpClient;
  */
 public class SampleAppApplication extends Application {
 
-    public static NetComponent NET_COMPONENT;
+    private static NetComponent NET_COMPONENT;
+
+    public static ApiComponent API_COMPONENT;
+
+    private static SampleAppApplication sInstance;
 
     @Inject
     OkHttpClient mClient;
@@ -23,6 +29,8 @@ public class SampleAppApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        sInstance = this;
 
         Stetho.initializeWithDefaults(this);
 
@@ -33,11 +41,23 @@ public class SampleAppApplication extends Application {
 
         NET_COMPONENT.inject(this);
 
+
+        SampleAppApplication.NET_COMPONENT.inject(this);
+
+
         initPicasso(mClient);
     }
 
     private void initPicasso(OkHttpClient client) {
         Picasso picasso = new Picasso.Builder(this).downloader(new OkHttp3Downloader(client)).build();
         Picasso.setSingletonInstance(picasso);
+    }
+
+    public static SampleAppApplication getApplication() {
+        return sInstance;
+    }
+
+    public static NetComponent netComponent() {
+        return NET_COMPONENT;
     }
 }
